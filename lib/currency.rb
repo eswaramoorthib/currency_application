@@ -1,7 +1,7 @@
 class Currency
   def  money(amount, coins)
-      raise "value must be greater than zero" unless amount > 0
-        # coins = {quarter: 25, dime: 10, nickel: 5, penny: 1}
+    begin
+       raise "value should be only numbers" unless amount.to_i > 0               
         hash = {}
 
         remaining_amount = amount
@@ -13,9 +13,10 @@ class Currency
         hash
       rescue => error
         error.message
+    end
   end
 
 end
 
-p Currency.new.money(444, {quarter: 25, dime: 10, nickel: 5, penny: 1})
+p Currency.new.money(100, {quarter: 25, dime: 10, nickel: 5, penny: 1})
  
