@@ -26,6 +26,14 @@ describe Currency do
         it "has a given value is nil" do
             expect(Currency.new.money(nil, {quarter: 25, dime: 10, nickel: 5, penny: 1})).to eq("value should be only numbers")
         end
-        
+        it "has a coin value is nil" do
+            expect(Currency.new.money(nil, {quarter: 25, dime: 10, nickel: 5, penny: nil})).to eq("value should be numbers, no other type of values")
+        end
+        it "has a coin value is string" do
+            expect(Currency.new.money(nil, {quarter: 25, dime: 10, nickel: 5, penny: "abcd"})).to eq("value should be numbers, no other type of values")
+        end
+        it "has a coin value is zero" do
+            expect(Currency.new.money(nil, {quarter: 25, dime: 10, nickel: 5, penny: 0})).to eq("value should be numbers, no other type of values")
+        end
     end
 end

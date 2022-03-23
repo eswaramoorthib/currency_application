@@ -1,7 +1,8 @@
 class Currency
   def  money(amount, coins)
     begin
-       raise "value should be only numbers" unless amount.to_i > 0               
+       raise "value should be numbers, no other type of values" unless coins.values.map(&:to_i).all?{|a| a > 0}  
+       raise "value should be only numbers" unless amount.to_i > 0         
         hash = {}
 
         remaining_amount = amount
@@ -18,5 +19,4 @@ class Currency
 
 end
 
-p Currency.new.money(100, {quarter: 25, dime: 10, nickel: 5, penny: 1})
- 
+p Currency.new.money(100, {quarter: 25, dime: 10, nickel: 5, penny: "abc"}) 
