@@ -1,12 +1,16 @@
 class Currency
-  def  money(amount, coins)
+  def initialize(denomination = {quarter: 25, dime: 10, nickel: 5, penny: true})
+    @denomination = denomination
+  end
+  
+  def money(amount)
     begin
-       raise "value should be numbers, no other type of values" unless coins.values.map(&:to_i).all?{|a| a > 0}  
-       raise "value should be only numbers" unless amount.to_i > 0         
+       raise "Value should be only numbers" unless amount.to_i > 0 
+       raise "The denomination value should be numberic type" unless @denomination.values.map(&:to_s).map(&:to_i).all?{|a| a > 0}      
         hash = {}
 
         remaining_amount = amount
-        coins.each do |key, value|
+        @denomination.each do |key, value|
           count,amt = remaining_amount.divmod(value)
           hash[key.to_sym] = count
           remaining_amount = amt
@@ -19,4 +23,4 @@ class Currency
 
 end
 
-p Currency.new.money(100, {quarter: 25, dime: 10, nickel: 5, penny: "abc"}) 
+p Currency.new.money(50) 
